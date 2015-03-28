@@ -39,9 +39,9 @@
           </div>
         </div>
       </div>
-      <div ng-repeat="t in tracks.slice().reverse()">
-        <a href="#{{ example.id }}" class="block p1 nav-item"
-          ng-click="playPause($index)"
+      <div ng-repeat="t in tracks">
+        <a id="#{{ $index }}" href="#{{ $index }}" class="block p1 nav-item"
+          ng-click="playPause( $index )"
           ng-class="{ 'bg-darken-1': player.currentTrack == t }">
           <span class="mr1">{{ $index }}.</span>
           {{ t.user.username }} - {{ t.title }}
