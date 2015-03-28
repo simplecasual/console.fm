@@ -39,11 +39,11 @@
           </div>
         </div>
       </div>
-      <div ng-repeat="t in tracks">
+      <div ng-repeat="t in tracks.slice().reverse()">
         <a href="#{{ example.id }}" class="block p1 nav-item"
           ng-click="playPause($index)"
           ng-class="{ 'bg-darken-1': player.currentTrack == t }">
-          <span class="mr1">{{ $index }}.</span>
+          <span class="mr1">{{ $index + 1 }}.</span>
           {{ t.user.username }} - {{ t.title }}
         </a>
       </div>
