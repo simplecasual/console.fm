@@ -3,55 +3,50 @@
   <head>
     <meta charset="utf-8">
     <title>Console.fm</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css" rel="stylesheet" type="text/css">
-    <style>
-      html, body {
-        height: 100%;
-        width: 100%;
-        font-family: 'Avenir', sans-serif;
-        color: #333;
-      }
-      .table {
-        display: table;
-        table-layout: fixed;
-        width: 100%;
-        height: 100%;
-      }
-      .table-cell {
-        display: table-cell;
-        vertical-align: middle;
-      }
-      .header {
-        text-align: center;
-      }
-      .h1 {
-        margin-bottom: 0;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-      }
-      .h2 {
-        font-weight: normal;
-      }
-      .cover-bg {
-        background-color: #ddd;
-        background-image: url('background.jpg');
-        background-size: cover;
-        background-position: center center;
-      }
-    </style>
+    <link href="http://jxnblk.com/plangular/docs/autobass.css" rel="stylesheet" type="text/css">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+    <script src="http://d2v52k3cl9vedd.cloudfront.net/plangular/2.0-beta-1/ng-plangular.min.js"></script>
   </head>
-  <body class="cover-bg <%= page_classes %>">
-    <section class="table">
-      <article class="table-cell">
-        <header class="header">
-          <h1 class="h1">
-            Console.fm
-          </h1>
-          <h2 class="h2">
-            Awesome electronic music, curated by top artists. 2011-2014
-          </h2>
-        </header>
-      </article>
-    </section>
+  <body class="container py4" ng-app="plangular">
+    <div plangular="https://soundcloud.com/alexbaldwin/sets/mixes-1">
+      <div class="table mb1">
+        <h3 class="table-cell full-width m0">console.fm</h3>
+        <small class="h6 table-cell nowrap">{{ currentTime | prettyTime }} - {{ duration | prettyTime }}</small>
+      </div>
+      <div class="table">
+        <div class="table-cell">
+          <button class="button-icon" ng-click="previous()">
+            <svg plangular-icon="previous"></svg>
+          </button>
+        </div>
+        <div class="table-cell">
+          <button class="h2 button-icon" ng-click="playPause(player.playlistIndex)">
+            <svg ng-if="player.tracks[player.i] != track || !player.playing" plangular-icon="play"></svg>
+            <svg ng-if="player.tracks[player.i] == track && player.playing" plangular-icon="pause"></svg>
+          </button>
+        </div>
+        <div class="table-cell">
+          <button class="button-icon" ng-click="next()">
+            <svg plangular-icon="next"></svg>
+          </button>
+        </div>
+        <div class="table-cell full-width">
+          <div class="px1">
+            <progress value="{{ currentTime / duration || 0 }}"
+              ng-click="seek($event)">
+              {{ currentTime / duration }}
+            </progress>
+          </div>
+        </div>
+      </div>
+      <div ng-repeat="t in tracks">
+        <a href="#{{ example.id }}" class="block p1 nav-item"
+          ng-click="playPause($index)"
+          ng-class="{ 'bg-darken-1': player.currentTrack == t }">
+          <span class="mr1">{{ $index }}.</span>
+          {{ t.user.username }} - {{ t.title }}
+        </a>
+      </div>
+    </div>
   </body>
 </html>
