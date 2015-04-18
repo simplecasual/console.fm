@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <title>Console.fm</title>
     <link rel="stylesheet" href="http://d2v52k3cl9vedd.cloudfront.net/bassdock/1.2.1/bassdock.min.css">
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-    <script src="http://d2v52k3cl9vedd.cloudfront.net/plangular/3.0.1/plangular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"></script>
+    <script src="//d2v52k3cl9vedd.cloudfront.net/plangular/3.0.1/plangular.min.js"></script>
   </head>
-  <body class="container" ng-app="plangular">
+  <body class="container" ng-app="app">
     <div plangular="http://soundcloud.com/alexbaldwin/likes" class="mb3">
   <div ng-if="track" class="p2">
     <div class="flex flex-center">
@@ -58,6 +58,12 @@
     </li>
   </ul>
 </div>
+    <script>
+      var app = angular.module('app', ['plangular'])
+        .config(function(plangularConfigProvider){
+          plangularConfigProvider.clientId = '281bf78db858fb70bf8ccef48976dde4';
+        });
+    </script>
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
       function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
