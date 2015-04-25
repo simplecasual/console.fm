@@ -102,27 +102,8 @@
             ng-click="previous()">
             <svg class="icon geomicon" data-icon="previous" viewBox="0 0 32 32" style="fill:currentcolor"><path d="M4 4 H8 V14 L28 4 V28 L8 18 V28 H4 z "></path></svg>
           </button>
-          <button class="flex-auto"
-            title="Play/Pause"
-            ng-click="playPause(index)">
-            <svg ng-if="player.playing !== track.src" class="icon geomicon" data-icon="play" viewBox="0 0 32 32" width="32" height="32" style="fill:currentcolor"><path d="M4 4 L28 16 L4 28 z "></path></svg>
-            <svg ng-if="player.playing === track.src" class="icon geomicon" data-icon="pause" viewBox="0 0 32 32" width="32" height="32" style="fill:currentcolor"><path d="M4 4 H12 V28 H4 z M20 4 H28 V28 H20 z "></path></svg>
-          </button>
-          <button class="flex-auto"
-            title="Play Next Track"
-            ng-click="next()">
-            <svg class="icon geomicon" data-icon="next" viewBox="0 0 32 32" style="fill:currentcolor"><path d="M4 4 L24 14 V4 H28 V28 H24 V18 L4 28 z "></path></svg>
-          </button>
-        </div>
-          <progress
-            class="progress half-width"
-            ng-click="player.seek($event)"
-            ng-value="currentTime / duration || 0">
-            {{ currentTime / duration }}
-          </progress>
 
-          <div class="progress-bar">
-            <div class="radial-progress" ng-value="(currentTime / duration) * 100 | number:0  || 0">
+            <div class="flex-none radial-progress" ng-value="(currentTime / duration) * 100 | number:0  || 0">
               <div class="circle">
                 <div class="mask full">
                   <div class="fill"></div>
@@ -143,8 +124,13 @@
                 </div>
               </div>
             </div>
-          </div>
 
+          <button class="flex-auto"
+            title="Play Next Track"
+            ng-click="next()">
+            <svg class="icon geomicon" data-icon="next" viewBox="0 0 32 32" style="fill:currentcolor"><path d="M4 4 L24 14 V4 H28 V28 H24 V18 L4 28 z "></path></svg>
+          </button>
+        </div>
 
       <aside ng-hide="true" class="mt4">
       <a href="" class="mr2">Share</a>
