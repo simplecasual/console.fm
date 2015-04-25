@@ -23,12 +23,33 @@
       }
       a, a:hover { color: #FF494E; }
 
+
+      .track-art    {
+        width:140px;
+        height:140px;
+        background-size: cover !important;
+        overflow:hidden;
+        margin-right: 25px;
+        border: 1px solid #979797;
+    }
+
+      .overlay    {  background: #FF535B;
+        text-align:center;
+        height: 140px;
+        opacity:0;
+        -webkit-transition: opacity .25s ease;
+      -moz-transition: opacity .25s ease;}
+
+      .track:hover .overlay, .is-active .overlay {
+      opacity:1;}
+
+      .plus { line-height: 170px; color: #fff; }
+
       .tracks { margin-bottom: 155px; }
       .track { margin-bottom: 40px; }
       .track-title { font-size: 22px; line-height: 26px; font-weight: 600;
       margin-bottom: 16px; }
       .track-artist { font-size: 18px; line-height: 22px; opacity: 0.60; }
-      .track-art { height: auto; margin-right: 25px; border: 1px solid #979797; }
 
       .playing-player {}
       .playing-title { font-size: 32px; line-height: 38px; font-weight: 600;
@@ -72,29 +93,27 @@
     </style>
   </head>
   <body ng-app="app">
-
-
-
-
-
-
-
-
     <div class="clearfix">
     <div plangular="http://soundcloud.com/alexbaldwin/likes" class="mb3">
     <div class="col col-6">
       <ul ng-if="tracks" class="tracks list-reset">
-        <li ng-repeat="track in tracks | limitTo:100" class="track">
+        <li ng-repeat="track in tracks | limitTo:100" class="track" ng-class="{'is-active': player.playing === track.src }">
           <button
             class="flex flex-center full-width left-align"
             title="Play {{track.title }}"
-            ng-class="{'track-active': player.playing === track.src }"
             ng-click="playPause($index)">
             <span class="flex-auto">
-              <img ng-src="{{ track.artwork_url.replace('large','t300x300') }}" alt="{{ track.title }}"
-              height="140" width="140" class="left track-art" />
+              <div class="track-art left" alt="{{ track.title }}" style="background: url({{ track.artwork_url.replace('large','t300x300') }})">
+                <div class="overlay">
+                  <span class="plus">
+                    <svg class="icon geomicon" data-icon="play" viewBox="0 0 32 32" width="32" height="32" style="fill:currentcolor"><path d="M4 4 L28 16 L4 28 z "></path></svg>
+                  </span>
+                </div>
+              </div>
+             <div class="overflow-hidden"> 
               <h2 class="track-title">{{track.title}}</h2>
               <h3 class="track-artist">{{track.user.username}}</h3>
+            </div>
             </span>
           </button>
         </li>
