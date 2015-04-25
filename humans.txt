@@ -1,0 +1,11 @@
+/* TEAM */
+Site: http://simplecasual.com
+Twitter: @consolefm
+
+/* THANKS */
+Name: Jackson http://jxnblk.com
+
+/* SITE */
+Last update: 2015/04/25
+Components: jQuery, Angular
+Software: Plangular, BassCSS

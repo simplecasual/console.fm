@@ -4,15 +4,18 @@
     <meta charset="utf-8">
     <title>Console.fm</title>
     <link href="http://d2v52k3cl9vedd.cloudfront.net/basscss/5.2.0/basscss.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6326032/684326/css/fonts.css" />
     <link rel="stylesheet" type="text/css" href="progress.css" />
     <script src="http://d2v52k3cl9vedd.cloudfront.net/plangular/3.0.1/plangular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
     <script src="//d2v52k3cl9vedd.cloudfront.net/plangular/3.0.1/plangular.min.js"></script>
+    <script src="//use.typekit.net/aoa2ooy.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
     <style>
 
       body, h1, h2, h3, h4, h5, h6, p, li {
-        font-family: 'Gotham SSm A', 'Gotham SSm B'; font-weight: 400; font-style: normal;
+        font-family: "proxima-nova", sans-serif;
+        font-weight: 400;
+        font-style: normal;
         margin: 0;
       }
       body {
@@ -22,13 +25,13 @@
 
       .tracks { margin-bottom: 155px; }
       .track { margin-bottom: 40px; }
-      .track-title { font-size: 22px; line-height: 26px; font-weight: 500;
+      .track-title { font-size: 22px; line-height: 26px; font-weight: 600;
       margin-bottom: 16px; }
       .track-artist { font-size: 18px; line-height: 22px; opacity: 0.60; }
       .track-art { height: auto; margin-right: 25px; border: 1px solid #979797; }
 
       .playing-player {}
-      .playing-title { font-size: 32px; line-height: 38px; font-weight: 500;
+      .playing-title { font-size: 32px; line-height: 38px; font-weight: 600;
       margin-bottom: 10px; }
       .playing-artist { font-size: 22px; line-height: 26px; opacity: 0.50; }
       .playing-art { height: auto; margin-bottom: 30px; }
@@ -42,6 +45,14 @@
 
       .progress { color: #FF494E; background-color: #CCCCCC; height: 4px; }
       .icon { height: 35px; }
+
+      .flex-center {
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+      .gray { color: #E0E0E0; }
+      .red { color: #FF2C39; }
 
       .kimono {
         position: fixed;
@@ -93,11 +104,11 @@
       <div class="fixed right-0 col col-6">
       <div ng-if="track" class="center playing-player">
         <img ng-src="{{ track.artwork_url.replace('large','t500x500') }}" alt="{{ track.title }}"
-          height="360" width="360" class="hide playing-art" />
+          height="360" width="360" class="playing-art" />
         <h2 class="playing-title">{{track.title}}</h2>
         <h3 class="playing-artist">{{track.user.username}}</h3>
         <div class="flex flex-center py2">
-          <button class="flex-auto"
+          <button class="flex-auto gray"
             title="Play Previous Track"
             ng-click="previous()">
             <svg class="icon geomicon" data-icon="previous" viewBox="0 0 32 32" style="fill:currentcolor"><path d="M4 4 H8 V14 L28 4 V28 L8 18 V28 H4 z "></path></svg>
@@ -115,7 +126,7 @@
               </div>
               <div class="inset">
                 <div class="percentage">
-                  <button class="playing-play"
+                  <button class="playing-play red"
                     title="Play/Pause"
                     ng-click="playPause(index)">
                     <svg ng-if="player.playing !== track.src" class="icon geomicon" data-icon="play" viewBox="0 0 32 32" width="32" height="32" style="fill:currentcolor"><path d="M4 4 L28 16 L4 28 z "></path></svg>
@@ -125,7 +136,7 @@
               </div>
             </div>
 
-          <button class="flex-auto"
+          <button class="flex-auto gray"
             title="Play Next Track"
             ng-click="next()">
             <svg class="icon geomicon" data-icon="next" viewBox="0 0 32 32" style="fill:currentcolor"><path d="M4 4 L24 14 V4 H28 V28 H24 V18 L4 28 z "></path></svg>
