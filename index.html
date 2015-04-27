@@ -39,6 +39,11 @@
         -webkit-transition: opacity .25s ease;
       -moz-transition: opacity .25s ease;}
 
+      .playing-view {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
       .track:hover .overlay { opacity:0.5; }
       .is-active .overlay, .is-active:hover .overlay { opacity:1; }
 
@@ -131,7 +136,7 @@
           </ul>
         </div>
         <div class="kimono"></div>
-        <div class="md-show fixed right-0 col col-6">
+        <div class="playing-view md-show fixed right-0 col col-6">
           <div ng-if="track" class="center playing-player p1 mt2">
             <img ng-src="{{ track.artwork_url.replace('large','t500x500') }}" alt="{{ track.title }}"
             height="360" width="360" class="playing-art" />
