@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Console.fm</title>
-    <link href="http://d2v52k3cl9vedd.cloudfront.net/basscss/5.2.0/basscss.min.css" rel="stylesheet">
+    <link href="http://d2v52k3cl9vedd.cloudfront.net/basscss/6.0.2/basscss.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="progress.css" />
     <script src="http://d2v52k3cl9vedd.cloudfront.net/plangular/3.0.1/plangular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
@@ -40,8 +40,8 @@
         -webkit-transition: opacity .25s ease;
       -moz-transition: opacity .25s ease;}
 
-      .track:hover .overlay, .is-active .overlay {
-      opacity:1;}
+      .track:hover .overlay { opacity:0.5; }
+      .is-active .overlay, .is-active:hover .overlay { opacity:1; }
 
       .plus { line-height: 170px; color: #fff; }
 
@@ -55,7 +55,7 @@
       .playing-title { font-size: 32px; line-height: 38px; font-weight: 600;
       margin-bottom: 10px; }
       .playing-artist { font-size: 22px; line-height: 26px; opacity: 0.50; }
-      .playing-art { height: auto; margin-bottom: 30px; }
+      .playing-art { height: auto; margin-bottom: 30px; max-width: 50vh; }
       .playing-play { height: 85px; width: 80px; }
 
       button{ background: none; box-shadow: none; }
@@ -74,6 +74,12 @@
 
       .gray { color: #E0E0E0; }
       .red { color: #FF2C39; }
+
+      .truncate {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
       .kimono {
         position: fixed;
@@ -94,88 +100,85 @@
   </head>
   <body ng-app="app">
     <div class="clearfix">
-    <div plangular="http://soundcloud.com/alexbaldwin/likes" class="mb3">
-    <div class="col col-6">
-      <ul ng-if="tracks" class="tracks list-reset">
-        <li ng-repeat="track in tracks | limitTo:100" class="track" ng-class="{'is-active': player.playing === track.src }">
-          <button
-            class="flex flex-center full-width left-align"
-            title="Play {{track.title }}"
-            ng-click="playPause($index)">
-            <span class="flex-auto">
-              <div class="track-art left" alt="{{ track.title }}" style="background: url({{ track.artwork_url.replace('large','t300x300') }})">
-                <div class="overlay">
-                  <span class="plus">
-                    <svg class="icon geomicon" data-icon="play" viewBox="0 0 32 32" width="32" height="32" style="fill:currentcolor"><path d="M4 4 L28 16 L4 28 z "></path></svg>
-                  </span>
-                </div>
-              </div>
-             <div class="overflow-hidden"> 
-              <h2 class="track-title">{{track.title}}</h2>
-              <h3 class="track-artist">{{track.user.username}}</h3>
-            </div>
-            </span>
-          </button>
-        </li>
-      </ul>
-    </div>
-    <div class="kimono"></div>
-      <div class="fixed right-0 col col-6">
-      <div ng-if="track" class="center playing-player">
-        <img ng-src="{{ track.artwork_url.replace('large','t500x500') }}" alt="{{ track.title }}"
-          height="360" width="360" class="playing-art" />
-        <h2 class="playing-title">{{track.title}}</h2>
-        <h3 class="playing-artist">{{track.user.username}}</h3>
-        <div class="flex flex-center py2">
-          <button class="flex-auto gray"
-            title="Play Previous Track"
-            ng-click="previous()">
-            <svg class="icon geomicon" data-icon="previous" viewBox="0 0 32 32" style="fill:currentcolor"><path d="M4 4 H8 V14 L28 4 V28 L8 18 V28 H4 z "></path></svg>
-          </button>
-
-            <div class="flex-none radial-progress" ng-value="(currentTime / duration) * 100 | number:0  || 0">
-              <div class="circle">
-                <div class="mask full">
-                  <div class="fill"></div>
-                </div>
-                <div class="mask half">
-                  <div class="fill"></div>
-                  <div class="fill fix"></div>
-                </div>
-              </div>
-              <div class="inset">
-                <div class="percentage">
-                  <button class="playing-play red"
-                    title="Play/Pause"
-                    ng-click="playPause(index)">
-                    <svg ng-if="player.playing !== track.src" class="icon geomicon" data-icon="play" viewBox="0 0 32 32" width="32" height="32" style="fill:currentcolor"><path d="M4 4 L28 16 L4 28 z "></path></svg>
-                    <svg ng-if="player.playing === track.src" class="icon geomicon" data-icon="pause" viewBox="0 0 32 32" width="32" height="32" style="fill:currentcolor"><path d="M4 4 H12 V28 H4 z M20 4 H28 V28 H20 z "></path></svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-          <button class="flex-auto gray"
-            title="Play Next Track"
-            ng-click="next()">
-            <svg class="icon geomicon" data-icon="next" viewBox="0 0 32 32" style="fill:currentcolor"><path d="M4 4 L24 14 V4 H28 V28 H24 V18 L4 28 z "></path></svg>
-          </button>
+      <div plangular="http://soundcloud.com/alexbaldwin/likes" class="mb3">
+        <div class="sm-col sm-col-12 md-col-6">
+          <ul ng-if="tracks" class="tracks list-reset">
+            <li ng-repeat="track in tracks | limitTo:100" class="track" ng-class="{'is-active': player.playing === track.src }">
+              <button
+                class="flex flex-center full-width left-align"
+                title="Play {{track.title }}"
+                ng-click="playPause($index)">
+                <span class="flex-auto">
+                  <div class="track-art left" alt="{{ track.title }}" style="background: url({{ track.artwork_url.replace('large','t300x300') }})">
+                    <div class="overlay">
+                      <span class="plus">
+                        <svg class="icon geomicon" data-icon="play" viewBox="0 0 32 32" width="32" height="32" style="fill:currentcolor"><path d="M4 4 L28 16 L4 28 z "></path></svg>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="overflow-hidden"> 
+                    <h2 class="track-title">{{track.title}}</h2>
+                    <h3 class="track-artist">{{track.user.username}}</h3>
+                  </div>
+                </span>
+              </button>
+            </li>
+          </ul>
         </div>
-
-      <aside ng-hide="true" class="mt4">
-      <a href="" class="mr2">Share</a>
-      <a ng-href="{{track.permalink_url}}">View on SoundCloud</a>
-    </aside>
-      </div>
-    </div>
+        <div class="kimono"></div>
+        <div class="md-show fixed right-0 col col-6">
+          <div ng-if="track" class="center playing-player">
+            <img ng-src="{{ track.artwork_url.replace('large','t500x500') }}" alt="{{ track.title }}"
+            height="360" width="360" class="playing-art" />
+            <h2 class="playing-title truncate">{{track.title}}</h2>
+            <h3 class="playing-artist truncate">{{track.user.username}}</h3>
+            <div class="flex flex-center py2">
+              <button class="flex-auto gray"
+                title="Play Previous Track"
+                ng-click="previous()">
+                <svg class="icon geomicon" data-icon="previous" viewBox="0 0 32 32" style="fill:currentcolor"><path d="M4 4 H8 V14 L28 4 V28 L8 18 V28 H4 z "></path></svg>
+              </button>
+              <div class="flex-none radial-progress" ng-value="(currentTime / duration) * 100 | number:0  || 0">
+                <div class="circle">
+                  <div class="mask full">
+                    <div class="fill"></div>
+                  </div>
+                  <div class="mask half">
+                    <div class="fill"></div>
+                    <div class="fill fix"></div>
+                  </div>
+                </div>
+                <div class="inset">
+                  <div class="percentage">
+                    <button class="playing-play red"
+                      title="Play/Pause"
+                      ng-click="playPause(index)">
+                      <svg ng-if="player.playing !== track.src" class="icon geomicon" data-icon="play" viewBox="0 0 32 32" width="32" height="32" style="fill:currentcolor"><path d="M4 4 L28 16 L4 28 z "></path></svg>
+                      <svg ng-if="player.playing === track.src" class="icon geomicon" data-icon="pause" viewBox="0 0 32 32" width="32" height="32" style="fill:currentcolor"><path d="M4 4 H12 V28 H4 z M20 4 H28 V28 H20 z "></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <button class="flex-auto gray"
+                title="Play Next Track"
+                ng-click="next()">
+                <svg class="icon geomicon" data-icon="next" viewBox="0 0 32 32" style="fill:currentcolor"><path d="M4 4 L24 14 V4 H28 V28 H24 V18 L4 28 z "></path></svg>
+              </button>
+            </div>
+            <aside ng-hide="true" class="mt4">
+              <a href="" class="mr2">Share</a>
+              <a ng-href="{{track.permalink_url}}">View on SoundCloud</a>
+            </aside>
+          </div>
+        </div>
 
       </div>
     </div>
     <script>
       var app = angular.module('app', ['plangular'])
-        .config(function(plangularConfigProvider){
-          plangularConfigProvider.clientId = '281bf78db858fb70bf8ccef48976dde4';
-        });
+      .config(function(plangularConfigProvider){
+        plangularConfigProvider.clientId = '281bf78db858fb70bf8ccef48976dde4';
+      });
     </script>
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
