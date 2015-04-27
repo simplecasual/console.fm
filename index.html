@@ -45,6 +45,11 @@
 
       .plus { line-height: 170px; color: #fff; }
 
+      .plus svg {
+        -webkit-filter: drop-shadow( 0 0 14px rgba(0,0,0,0.43) );
+        filter: drop-shadow( 0 0 14px rgba(0,0,0,0.43) );
+      }
+
       .tracks { margin-bottom: 155px; }
       .track { margin-bottom: 40px; }
       .track-title { font-size: 22px; line-height: 26px; font-weight: 600;
@@ -133,7 +138,8 @@
             <h2 class="playing-title truncate">{{track.title}}</h2>
             <h3 class="playing-artist truncate">{{track.user.username}}</h3>
             <div class="flex flex-center py2">
-              <button class="flex-auto gray"
+              <div class="flex-grow"></div>
+              <button class="flex-none gray"
                 title="Play Previous Track"
                 ng-click="previous()">
                 <svg class="icon geomicon" data-icon="previous" viewBox="0 0 32 32" style="fill:currentcolor"><path d="M4 4 H8 V14 L28 4 V28 L8 18 V28 H4 z "></path></svg>
@@ -159,11 +165,12 @@
                   </div>
                 </div>
               </div>
-              <button class="flex-auto gray"
+              <button class="flex-none gray"
                 title="Play Next Track"
                 ng-click="next()">
                 <svg class="icon geomicon" data-icon="next" viewBox="0 0 32 32" style="fill:currentcolor"><path d="M4 4 L24 14 V4 H28 V28 H24 V18 L4 28 z "></path></svg>
               </button>
+              <div class="flex-grow"></div>
             </div>
             <aside ng-hide="true" class="mt4">
               <a href="" class="mr2">Share</a>
