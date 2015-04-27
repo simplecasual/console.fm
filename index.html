@@ -22,18 +22,19 @@
       a, a:hover { color: #FF494E; }
 
       .track-art    {
-        width:140px;
-        max-width: 25vw;
-        height: auto;
+        width: 10vw;
+        height: 10vw;
         background-size: cover !important;
         overflow:hidden;
         margin-right: 25px;
         border: 1px solid #979797;
     }
 
-      .overlay    {  background: #FF535B;
+      .overlay    {
+        background: #FF535B;
+        width: 10vw;
+        height: 10vw;
         text-align:center;
-        height: 140px;
         opacity:0;
         -webkit-transition: opacity .25s ease;
       -moz-transition: opacity .25s ease;}
@@ -41,9 +42,10 @@
       .track:hover .overlay { opacity:0.5; }
       .is-active .overlay, .is-active:hover .overlay { opacity:1; }
 
-      .plus { line-height: 170px; color: #fff; }
+      .plus { color: #fff; }
 
       .plus svg {
+        max-height: 100%;
         -webkit-filter: drop-shadow( 0 0 14px rgba(0,0,0,0.43) );
         filter: drop-shadow( 0 0 14px rgba(0,0,0,0.43) );
       }
@@ -88,8 +90,8 @@
         position: fixed;
         bottom: 0;
         left: 0;
-        width: 50%;
         height: 155px;
+        width: 100%;
         z-index: 99;
         background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,0) 1%, rgba(255,255,255,1) 100%); /* FF3.6+ */
         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(1%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
@@ -113,8 +115,8 @@
                 ng-click="playPause($index)">
                 <span class="flex-auto">
                   <div class="track-art left" alt="{{ track.title }}" style="background: url({{ track.artwork_url.replace('large','t300x300') }})">
-                    <div class="overlay">
-                      <span class="plus">
+                    <div class="overlay flex flex-center">
+                      <span class="plus mx-auto block">
                         <svg class="icon geomicon" data-icon="play" viewBox="0 0 32 32" width="32" height="32" style="fill:currentcolor"><path d="M4 4 L28 16 L4 28 z "></path></svg>
                       </span>
                     </div>
