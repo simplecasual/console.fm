@@ -158,7 +158,7 @@
             <h3 class="playing-artist truncate">{{track.user.username}}</h3>
             <div class="flex flex-center py2 mt3">
               <div class="flex-grow"></div>
-              <button class="flex-none gray"
+              <button class="flex-none"
                 title="Play Previous Track"
                 hotkey="{left: previous}"
                 ng-click="previous()">
@@ -176,7 +176,7 @@
                 </div>
                 <div class="inset">
                   <div class="percentage">
-                    <button class="playing-play red"
+                    <button class="playing-play"
                       title="Play/Pause"
                       ng-click="playPause(index)">
                       <img ng-if="player.playing !== track.src" class="icon" src="assets/play.svg">
@@ -185,7 +185,7 @@
                   </div>
                 </div>
               </div>
-              <button class="flex-none gray"
+              <button class="flex-none"
                 title="Play Next Track"
                 hotkey="{right: next}"
                 ng-click="next()">
