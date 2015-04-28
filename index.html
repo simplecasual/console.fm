@@ -116,19 +116,17 @@
                 class="flex flex-center full-width left-align"
                 title="Play {{track.title }}"
                 ng-click="playPause($index)">
-                <span class="flex-auto">
-                  <div class="track-art left" alt="{{ track.title }}" style="background: url({{ track.artwork_url.replace('large','t300x300') }})">
+                  <div class="track-art flex-none" alt="{{ track.title }}" style="background: url({{ track.artwork_url.replace('large','t300x300') }})">
                     <div class="overlay flex flex-center">
                       <span class="plus mx-auto block">
                         <img class="icon white" src="assets/player.svg">
                       </span>
                     </div>
                   </div>
-                  <div class="overflow-hidden"> 
+                  <div class="flex-auto"> 
                     <h2 class="track-title">{{track.title}}</h2>
                     <h3 class="track-artist">{{track.user.username}}</h3>
                   </div>
-                </span>
               </button>
             </li>
           </ul>
