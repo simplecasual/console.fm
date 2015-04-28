@@ -97,7 +97,6 @@
         left: 0;
         height: 155px;
         width: 100%;
-        z-index: 99;
         background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,0) 1%, rgba(255,255,255,1) 100%); /* FF3.6+ */
         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(1%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
         background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 1%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
@@ -122,7 +121,7 @@
                   <div class="track-art left" alt="{{ track.title }}" style="background: url({{ track.artwork_url.replace('large','t300x300') }})">
                     <div class="overlay flex flex-center">
                       <span class="plus mx-auto block">
-                        <svg class="icon geomicon" data-icon="play" viewBox="0 0 32 32" width="32" height="32" style="fill:currentcolor"><path d="M4 4 L28 16 L4 28 z "></path></svg>
+                        <img class="icon white" src="assets/player.svg">
                       </span>
                     </div>
                   </div>
@@ -135,8 +134,8 @@
             </li>
           </ul>
         </div>
-        <div class="kimono"></div>
-        <div class="playing-view md-show fixed right-0 col col-6">
+        <div class="kimono z2"></div>
+        <div class="z3 playing-view md-show fixed right-0 col col-6">
           <div ng-if="track" class="center playing-player p1 mt2">
             <img ng-src="{{ track.artwork_url.replace('large','t500x500') }}" alt="{{ track.title }}"
             height="360" width="360" class="playing-art" />
@@ -147,7 +146,7 @@
               <button class="flex-none gray"
                 title="Play Previous Track"
                 ng-click="previous()">
-                <svg class="icon geomicon" data-icon="previous" viewBox="0 0 32 32" style="fill:currentcolor"><path d="M4 4 H8 V14 L28 4 V28 L8 18 V28 H4 z "></path></svg>
+                <img class="icon" src="assets/previous.svg">
               </button>
               <div class="flex-none radial-progress" ng-value="(currentTime / duration) * 100 | number:0  || 0">
                 <div class="circle">
@@ -164,8 +163,8 @@
                     <button class="playing-play red"
                       title="Play/Pause"
                       ng-click="playPause(index)">
-                      <svg ng-if="player.playing !== track.src" class="icon geomicon" data-icon="play" viewBox="0 0 32 32" width="32" height="32" style="fill:currentcolor"><path d="M4 4 L28 16 L4 28 z "></path></svg>
-                      <svg ng-if="player.playing === track.src" class="icon geomicon" data-icon="pause" viewBox="0 0 32 32" width="32" height="32" style="fill:currentcolor"><path d="M4 4 H12 V28 H4 z M20 4 H28 V28 H20 z "></path></svg>
+                      <img ng-if="player.playing !== track.src" class="icon" src="assets/play.svg">
+                      <img ng-if="player.playing === track.src" class="icon" src="assets/pause.svg">
                     </button>
                   </div>
                 </div>
@@ -173,7 +172,7 @@
               <button class="flex-none gray"
                 title="Play Next Track"
                 ng-click="next()">
-                <svg class="icon geomicon" data-icon="next" viewBox="0 0 32 32" style="fill:currentcolor"><path d="M4 4 L24 14 V4 H28 V28 H24 V18 L4 28 z "></path></svg>
+                <img class="icon" src="assets/next.svg">
               </button>
               <div class="flex-grow"></div>
             </div>
