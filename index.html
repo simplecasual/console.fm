@@ -45,7 +45,9 @@
 
       .playing-view {
         top: 50%;
+        left: 50%;
         transform: translateY(-50%);
+        max-width: 512px;
       }
 
       .plus { transition: opacity 0.22s ease; color: #fff; opacity: 0; }
@@ -150,7 +152,7 @@
           </ul>
         </div>
         <div class="kimono z2"></div>
-        <div class="z3 playing-view md-show fixed right-0 col col-6">
+        <div class="z3 playing-view md-show fixed bottom-0">
           <div ng-if="track" class="center playing-player p1 mt2">
             <img ng-src="{{ track.artwork_url.replace('large','t500x500') }}" alt="{{ track.title }}"
             height="360" width="360" class="playing-art" />
