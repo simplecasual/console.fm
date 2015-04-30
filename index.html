@@ -47,6 +47,7 @@
         top: 50%;
         left: 50%;
         transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
         max-width: 512px;
       }
 
@@ -132,7 +133,7 @@
         <div class="sm-col sm-col-12 md-col-6">
           <ul ng-if="tracks" class="tracks list-reset mt2">
             <li ng-repeat="track in tracks | limitTo:100" class="track" ng-class="{'is-active': player.playing === track.src }">
-              <button
+              <div
                 class="flex flex-center full-width left-align"
                 title="Play {{track.title }}"
                 ng-click="playPause($index)">
@@ -147,7 +148,7 @@
                     <h2 class="track-title">{{track.title}}</h2>
                     <h3 class="track-artist">{{track.user.username}}</h3>
                   </div>
-              </button>
+              </div>
             </li>
           </ul>
         </div>
@@ -158,7 +159,7 @@
             height="360" width="360" class="playing-art" />
             <h2 class="playing-title truncate">{{track.title}}</h2>
             <h3 class="playing-artist truncate">{{track.user.username}}</h3>
-            <div class="flex flex-center py2 mt3">
+            <div class="flex flex-center py2">
               <div class="flex-grow"></div>
               <button class="flex-none"
                 title="Play Previous Track"
