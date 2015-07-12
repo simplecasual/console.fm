@@ -1,0 +1,32 @@
+<div class="clearfix">
+  <div plangular="http://soundcloud.com/<%= "#{@artist}/#{@track} "%>" class="mb4 relative" style="min-height: 50vh; background-repeat: no-repeat; background-size: cover; background-position: center center; background-image: url({{ track.artwork_url.replace('large','t500x500') }})">
+    <div class="playing-player px-1 bg-darken-4 absolute full-width flex flex-center" style="height: 100%">
+      <div class="flex-auto center">
+      <h2 class="playing-title truncate white">{{track.title}}</h2>
+      <h3 class="playing-artist truncate white">{{track.user.username}}</h3>
+      <div class="flex flex-center">
+        <div class="flex-grow"></div>
+        <button class="flex-none playing-play"
+          title="Play/Pause"
+          ng-click="playPause(index)">
+          <img ng-if="player.playing !== track.src" class="icon" src="/assets/play.svg">
+          <img ng-if="player.playing === track.src" class="icon" src="/assets/pause.svg">
+        </button>
+        <div class="flex-grow"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<%= render 'top_tracks' %>
+
+<script>
+  $('#js-affix-player').affix({
+  offset: {
+    top: function () {
+      return (screen.height / 2)
+    }
+  }
+  })
+</script>

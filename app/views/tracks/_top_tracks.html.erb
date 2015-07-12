@@ -1,0 +1,78 @@
+<div id="js-track-height" class="container clearfix">
+  <div plangular="http://soundcloud.com/alexbaldwin/likes">
+    <div class="sm-col sm-col-12 md-col-6">
+      <ul ng-if="tracks" class="tracks list-reset mt2">
+        <li ng-repeat="track in tracks | limitTo:100" class="track" ng-class="{'is-active': player.playing === track.src }">
+          <div
+            class="flex flex-center full-width left-align"
+            title="Play {{track.title }}"
+            ng-click="playPause($index)">
+            <div class="track-art flex-none" alt="{{ track.title }}" style="background: url({{ track.artwork_url.replace('large','t300x300') }})">
+              <div class="overlay flex flex-center">
+                <span class="plus mx-auto block">
+                  <img class="icon white" src="/assets/player.svg">
+                </span>
+              </div>
+            </div>
+            <div class="flex-auto"> 
+              <h2 class="track-title">{{track.title}}</h2>
+              <h3 class="track-artist">{{track.user.username}}</h3>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="kimono z2"></div>
+    <div id="js-affix-player" class="z3 playing-view md-show col col-6" style="position: fixed;">
+      <div ng-if="track" class="center playing-player p1 mt2">
+        <img ng-src="{{ track.artwork_url.replace('large','t500x500') }}" alt="{{ track.title }}"
+        height="360" width="360" class="playing-art" />
+        <h2 class="playing-title truncate">{{track.title}}</h2>
+        <h3 class="playing-artist truncate">{{track.user.username}}</h3>
+        <div class="flex flex-center py2">
+          <div class="flex-grow"></div>
+          <button class="flex-none"
+            title="Play Previous Track"
+            hotkey="{left: previous}"
+            ng-click="previous()">
+            <img class="icon" src="/assets/previous.svg">
+          </button>
+          <div class="flex-none radial-progress" ng-value="(currentTime / duration) * 100 | number:0  || 0">
+            <div class="circle">
+              <div class="mask full">
+                <div class="fill"></div>
+              </div>
+              <div class="mask half">
+                <div class="fill"></div>
+                <div class="fill fix"></div>
+              </div>
+            </div>
+            <div class="inset">
+              <div class="percentage">
+                <button class="playing-play"
+                  title="Play/Pause"
+                  ng-click="playPause(index)">
+                  <img ng-if="player.playing !== track.src" class="icon" src="/assets/play.svg">
+                  <img ng-if="player.playing === track.src" class="icon" src="/assets/pause.svg">
+                </button>
+              </div>
+            </div>
+          </div>
+          <button class="flex-none"
+            title="Play Next Track"
+            hotkey="{right: next}"
+            ng-click="next()">
+            <img class="icon" src="/assets/next.svg">
+          </button>
+          <div class="flex-grow"></div>
+        </div>
+        <aside ng-hide="true" class="mt4">
+          <a href="" class="mr2">Share</a>
+          <a ng-href="{{track.permalink_url}}">View on SoundCloud</a>
+        </aside>
+      </div>
+    </div>
+
+  </div>
+</div>
+
