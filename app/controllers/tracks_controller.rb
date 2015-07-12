@@ -10,8 +10,10 @@ class TracksController < ApplicationController
   # GET /tracks/1
   # GET /tracks/1.json
   def show
-    @artist = params[:artist]
-    @track = params[:track]
+    artist = params[:artist]
+    track = params[:track]
+    @url = "http://soundcloud.com/#{artist}/#{track}"
+    @soundcloud_track = Soundcloud.client.get('/resolve', :url => @url)
   end
 
   # GET /tracks/new
