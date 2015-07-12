@@ -16,6 +16,13 @@ class TracksController < ApplicationController
     @soundcloud_track = Soundcloud.client.get('/resolve', :url => @url)
   end
 
+  def playlist
+    playlist = params[:playlist]
+    @url = "http://soundcloud.com/alexbaldwin/sets/#{playlist}"
+    @playlist_url = @url
+    @soundcloud_playlist = Soundcloud.client.get('/resolve', :url => @url)
+  end
+
   # GET /tracks/new
   def new
     @track = Track.new

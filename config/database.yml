@@ -1,4 +1,5 @@
-default: &default
+development: &default
+  database: consolefm_development
   adapter: postgresql
   encoding: unicode
   # For details on connection pooling, see rails configuration guide

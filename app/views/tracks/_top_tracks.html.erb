@@ -1,5 +1,16 @@
+<% if @soundcloud_playlist %>
+  <%
+      meta title: "#{@soundcloud_playlist.title} on Console.fm",
+      description: @soundcloud_playlist.description,
+      twitter: {
+        card: "summary",
+        site: "@consolefm"
+      }
+  %>
+<% end %>
+
 <div id="js-track-height" class="container clearfix">
-  <div plangular="http://soundcloud.com/alexbaldwin/likes">
+  <div plangular="<%= @playlist_url || "http://soundcloud.com/alexbaldwin/likes" %>">
     <div class="sm-col sm-col-12 md-col-6">
       <ul ng-if="tracks" class="tracks list-reset mt2">
         <li ng-repeat="track in tracks | limitTo:100" class="track" ng-class="{'is-active': player.playing === track.src }">
