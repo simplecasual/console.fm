@@ -26,6 +26,8 @@
         height: 10vw;
         max-width: 140px;
         max-height: 140px;
+        min-width: 50px;
+        min-height: 50px;
         background-size: cover !important;
         overflow:hidden;
         margin-right: 25px;
@@ -37,6 +39,8 @@
         height: 10vw;
         max-width: 140px;
         max-height: 140px;
+        min-width: 50px;
+        min-height: 50px;
         text-align:center;
         background-color: rgba(0,0,0,0);
         transition: background-color 0.22s ease;
@@ -92,7 +96,7 @@
       .col { padding: 0 65px;}
 
       .progress { color: #FF494E; background-color: #CCCCCC; height: 4px; }
-      .icon { height: 35px; }
+      .icon { height: 35px; max-width: 50%; }
       .icon:active { position: relative; top: 4px; }
 
       .flex-center {
@@ -109,10 +113,12 @@
         text-overflow: ellipsis;
       }
 
+      /* Mobile styling */
       @media (max-width: 52em){
-        .tracks {
-          margin-top: 73px;
-        }
+        .tracks { margin-top: 89px; }
+        .track { margin-bottom: 1rem; }
+        .track-title { font-size: 18px; line-height: 1.2; margin-bottom: 8px; }
+        .track-artist { font-size: 16px; line-height: 1; }
       }
 
       .kimono {
@@ -138,7 +144,7 @@
 
 
         <div class="bg-white border-bottom col-12 z3 md-hide fixed">
-          <div ng-if="track" class="playing-player p1">
+          <div ng-if="track" class="playing-player p2">
             <div class="flex">
               <div class="flex-none">
                 <img ng-src="{{ track.artwork_url.replace('large','t500x500')
@@ -174,7 +180,8 @@
                 class="flex flex-center full-width left-align"
                 title="Play {{track.title }}"
                 ng-click="playPause($index)">
-                  <div class="track-art flex-none" alt="{{ track.title }}" style="background: url({{ track.artwork_url.replace('large','t300x300') }})">
+                  <div class="track-art flex-none" alt="{{ track.title }}"
+                    style="background: #efefef url({{ track.artwork_url.replace('large','t300x300') }})">
                     <div class="overlay flex flex-center">
                       <span class="plus mx-auto block">
                         <img class="icon white" src="assets/player.svg">
