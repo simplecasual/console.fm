@@ -4,16 +4,13 @@
     <meta charset="utf-8">
     <title>Console.fm</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link href="http://d2v52k3cl9vedd.cloudfront.net/basscss/7.0.4/basscss.min.css" rel="stylesheet">
+    <link href="basscss.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="progress.css" />
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-    <script src="//d2v52k3cl9vedd.cloudfront.net/plangular/3.0.1/plangular.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-hotkeys/1.4.5/hotkeys.min.js"></script>
-    <script src="//use.typekit.net/aoa2ooy.js"></script>
-    <script>try{Typekit.load();}catch(e){}</script>
+    <script src="angular.min.js"></script>
+    <script src="plangular.min.js"></script>
     <style>
       body, h1, h2, h3, h4, h5, h6, p, li {
-        font-family: "proxima-nova", sans-serif;
+        font-family: SF UI Text,Roboto,Helvetica Neue,Helvetica,sans-serif;
         font-weight: 400;
         font-style: normal;
         margin: 0;
@@ -96,7 +93,7 @@
       .col { padding: 0 65px;}
 
       .progress { color: #FF494E; background-color: #CCCCCC; height: 4px; }
-      .icon { height: 35px; max-width: 50%; }
+      .icon { height: 35px; }
       .icon:active { position: relative; top: 4px; }
 
       .flex-center {
@@ -184,7 +181,8 @@
                     style="background: #efefef url({{ track.artwork_url.replace('large','t300x300') }})">
                     <div class="overlay flex flex-center">
                       <span class="plus mx-auto block">
-                        <img class="icon white" src="assets/player.svg">
+                        <img class="icon white" style="max-width: 50%;
+                        max-height: 50%" src="assets/player.svg">
                       </span>
                     </div>
                   </div>
@@ -250,7 +248,7 @@
       </div>
     </div>
     <script>
-      var app = angular.module('app', ['plangular', 'cfp.hotkeys'])
+      var app = angular.module('app', ['plangular'])
       .config(function(plangularConfigProvider){
         plangularConfigProvider.clientId = '281bf78db858fb70bf8ccef48976dde4';
       });
