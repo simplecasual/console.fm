@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Console.fm</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link href="http://d2v52k3cl9vedd.cloudfront.net/basscss/6.0.2/basscss.min.css" rel="stylesheet">
+    <link href="http://d2v52k3cl9vedd.cloudfront.net/basscss/7.0.4/basscss.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="progress.css" />
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
     <script src="//d2v52k3cl9vedd.cloudfront.net/plangular/3.0.1/plangular.min.js"></script>
@@ -73,13 +73,11 @@
       margin-bottom: 16px; }
       .track-artist { font-size: 18px; line-height: 22px; opacity: 0.60; }
 
-      .playing-player {}
       .playing-title { font-size: 32px; line-height: 38px; font-weight: 600;
       margin-bottom: 10px; }
       .playing-artist { font-size: 22px; line-height: 26px; opacity: 0.50; }
       .playing-art {
         height: auto;
-        margin-bottom: 30px;
         max-width: 50vh;
         max-width: 250px;
         max-height: 250px;
@@ -87,7 +85,7 @@
       }
       .playing-play { height: 85px; width: 80px; }
 
-      button{ background: none; box-shadow: none; }
+      button{ -webkit-appearance: none; border: none; background: none; box-shadow: none; }
       button:focus {outline:0;}
       .li { margin: 0; padding: 0;}
       .is-active, .button.is-active { box-shadow: none; }
@@ -111,6 +109,12 @@
         text-overflow: ellipsis;
       }
 
+      @media (max-width: 52em){
+        .tracks {
+          margin-top: 73px;
+        }
+      }
+
       .kimono {
         position: fixed;
         bottom: 0;
@@ -128,8 +132,41 @@
     </style>
   </head>
   <body ng-app="app">
-    <div class="container clearfix">
+
+
       <div plangular="http://soundcloud.com/alexbaldwin/likes">
+
+
+        <div class="bg-white border-bottom col-12 z3 md-hide fixed">
+          <div ng-if="track" class="playing-player p1">
+            <div class="flex">
+              <div class="flex-none">
+                <img ng-src="{{ track.artwork_url.replace('large','t500x500')
+                }}" alt="{{ track.title }}" height="50" width="50"
+                class="playing-art mr2" />
+              </div>
+              <button class="flex-grow"
+                title="Play Previous Track"
+                hotkey="{left: previous}"
+                ng-click="previous()">
+                <img class="icon" src="assets/previous.svg">
+              </button>
+              <button class="flex-grow"
+                title="Play/Pause"
+                ng-click="playPause(index)">
+                <img ng-if="player.playing !== track.src" class="icon" src="assets/play.svg">
+                <img ng-if="player.playing === track.src" class="icon" src="assets/pause.svg">
+              </button>
+              <button class="flex-grow"
+                title="Play Next Track"
+                hotkey="{right: next}"
+                ng-click="next()">
+                <img class="icon" src="assets/next.svg">
+              </button>
+            </div>
+          </div>
+        </div>
+    <div class="container clearfix mxn2 p2">
         <div class="sm-col sm-col-12 md-col-6">
           <ul ng-if="tracks" class="tracks list-reset mt2">
             <li ng-repeat="track in tracks | limitTo:100" class="track" ng-class="{'is-active': player.playing === track.src }">
@@ -156,7 +193,7 @@
         <div class="z3 playing-view md-show fixed col col-6">
           <div ng-if="track" class="center playing-player p1 mt2">
             <img ng-src="{{ track.artwork_url.replace('large','t500x500') }}" alt="{{ track.title }}"
-            height="360" width="360" class="playing-art" />
+            height="360" width="360" class="playing-art mb2" />
             <h2 class="playing-title truncate">{{track.title}}</h2>
             <h3 class="playing-artist truncate">{{track.user.username}}</h3>
             <div class="flex flex-center py2">
