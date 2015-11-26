@@ -1,7 +1,7 @@
 .radial-progress {
   width: 85px;
   height: 85px;
-  background-color: #e0e0e0;
+  background-color: #AAAAAA;
   border-radius: 50%;
 }
 .radial-progress .circle .mask,
