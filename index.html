@@ -8,7 +8,7 @@
     <link href="progress.css" rel="stylesheet">
     <style>
       body, h1, h2, h3, h4, h5, h6, p, li {
-        font-family: -apple-system, SF UI Text,Roboto,Helvetica Neue,Helvetica,sans-serif;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,sans-serif;
         font-weight: 400;
         font-style: normal;
         margin: 0;
@@ -136,8 +136,23 @@
   </head>
   <body ng-app="app">
 
+    <div id="js-explainer" class="border-bottom p2 overflow-hidden">
+      <div class="container">
+        <p class="m0 left"><strong>Console.fm</strong><span class="dark-gray"> is a top one-hundred chart for what's going on right now in electronic dance music.</span>
 
-      <div plangular="https://soundcloud.com/consolefm/sets/popular">
+          <a class="px2 inline-block" title="Follow @consolefm on Twitter" href="https://twitter.com/consolefm">
+        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 335 276" fill="#3ba9ee">
+  <path d="m302 70a195 195 0 0 1 -299 175 142 142 0 0 0 97 -30 70 70 0 0 1 -58 -47 70 70 0 0 0 31 -2 70 70 0 0 1 -57 -66 70 70 0 0 0 28 5 70 70 0 0 1 -18 -90 195 195 0 0 0 141 72 67 67 0 0 1 116 -62 117 117 0 0 0 43 -17 65 65 0 0 1 -31 38 117 117 0 0 0 39 -11 65 65 0 0 1 -32 35"/>
+</svg>
+</a>
+        </p>
+
+  <p class="m0 right caps"><a href="#" title="Hide explainer" onclick="foreverHide();return false;"  class="gray">Hide</a></p>
+</div>
+</div>
+
+
+      <div plangular="https://soundcloud.com/alexbaldwin/likes">
 
 
         <div class="bg-white border-bottom col-12 z3 md-hide fixed">
@@ -247,12 +262,31 @@
       </div>
     </div>
     <script>
+      // Hide element and set localstorage variable upon clicking the link
+      var foreverHide = function() {
+        hideExplainer();
+        localStorage.setItem('hiddenExplanation', '1');
+      };
+      // Hides explainer element
+      var hideExplainer = function() {
+        var el = document.getElementById("js-explainer");
+        el.classList.add("hide");
+      };
+      // Retrieve state of explainer
+      var shouldHideExplainer = localStorage.getItem('hiddenExplanation');
+      // Keep it hidden
+      if (shouldHideExplainer == '1') {
+        hideExplainer();
+      } 
+      else { // or set variable for the first time
+        localStorage.setItem('hiddenExplanation', '0');
+      }
+      // Set up Plangular
       var app = angular.module('app', ['plangular'])
       .config(function(plangularConfigProvider){
         plangularConfigProvider.clientId = '281bf78db858fb70bf8ccef48976dde4';
       });
-    </script>
-    <script>
+      // Google Analytics
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
       function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
       e=o.createElement(i);r=o.getElementsByTagName(i)[0];
