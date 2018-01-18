@@ -27,6 +27,8 @@
         overflow:hidden;
         margin-right: 25px;
         box-shadow: inset 0 0 1px rgba(0,0,0,0.1);
+        -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+        filter: grayscale(100%);
     }
 
       .overlay    {
@@ -68,9 +70,9 @@
 
       .tracks { margin-bottom: 155px; }
       .track { margin-bottom: 40px; }
-      .track-title { font-size: 22px; line-height: 26px; font-weight: 600;
-      margin-bottom: 16px; }
-      .track-artist { font-size: 18px; line-height: 22px; color: #AAAAAA; }
+      .track-title { font-size: 18px; line-height: 26px; font-weight: 600;
+      margin-bottom: 16px; margin-top: 20px; }
+      .track-artist { font-size: 12px; line-height: 22px; color: #AAAAAA; }
 
       .playing-title { font-size: 32px; line-height: 38px; font-weight: 600;
       margin-bottom: 10px; }
@@ -134,28 +136,11 @@
     <script src="angular.min.js"></script>
     <script src="plangular.min.js"></script>
   </head>
-  <body ng-app="app">
+  <body ng-app="app" class="bg-black">
 
-    <div id="js-explainer" class="border-bottom p2 overflow-hidden">
-      <div class="container">
-        <p class="m0 left"><strong>Console.fm</strong><span class="dark-gray"> is a top one-hundred chart for what's going on right now in electronic dance music.</span>
+      <div plangular="https://soundcloud.com/alexbaldwin/sets/dopemind-experiment-c">
 
-          <a class="px2 inline-block" title="Follow @consolefm on Twitter" href="https://twitter.com/consolefm">
-        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 335 276" fill="#3ba9ee">
-  <path d="m302 70a195 195 0 0 1 -299 175 142 142 0 0 0 97 -30 70 70 0 0 1 -58 -47 70 70 0 0 0 31 -2 70 70 0 0 1 -57 -66 70 70 0 0 0 28 5 70 70 0 0 1 -18 -90 195 195 0 0 0 141 72 67 67 0 0 1 116 -62 117 117 0 0 0 43 -17 65 65 0 0 1 -31 38 117 117 0 0 0 39 -11 65 65 0 0 1 -32 35"/>
-</svg>
-</a>
-        </p>
-
-  <p class="m0 right caps"><a href="#" title="Hide explainer" onclick="foreverHide();return false;"  class="gray">Hide</a></p>
-</div>
-</div>
-
-
-      <div plangular="https://soundcloud.com/consolefm/likes">
-
-
-        <div class="bg-white border-bottom col-12 z3 md-hide fixed">
+        <div class="bg-white border-top col-12 z3 fixed bottom-0">
           <div ng-if="track" class="playing-player p2">
             <div class="flex">
               <div class="flex-none">
@@ -185,11 +170,11 @@
           </div>
         </div>
     <div class="container clearfix mxn2 p2">
-        <div class="sm-col sm-col-12 md-col-6">
-          <ul ng-if="tracks" class="tracks list-reset mt2">
-            <li ng-repeat="track in tracks | limitTo:100" class="track" ng-class="{'is-active': player.playing === track.src }">
+        <div class="">
+          <div ng-if="tracks" class="tracks list-reset mt2 flex flex-wrap">
+            <div ng-repeat="track in tracks | limitTo:100" class="track col-6" ng-class="{'is-active': player.playing === track.src }">
               <div
-                class="flex flex-center full-width left-align"
+                class="flex flex-center center flex-column"
                 title="Play {{track.title }}"
                 ng-click="playPause($index)">
                   <div class="track-art flex-none" alt="{{ track.title }}"
@@ -201,64 +186,14 @@
                       </span>
                     </div>
                   </div>
-                  <div class="flex-auto">
-                    <h2 class="track-title">{{track.title}}</h2>
-                    <h3 class="track-artist">{{track.user.username}}</h3>
+                  <div class="flex-none">
+                    <h2 class="track-title white">{{track.title}}</h2>
+                    <h3 class="track-artist white">{{track.user.username}}</h3>
                   </div>
               </div>
-            </li>
-          </ul>
-        </div>
-        <div class="kimono z2 md-show"></div>
-        <div class="z3 playing-view md-show fixed col col-6">
-          <div ng-if="track" class="center playing-player p1 mt2">
-            <img ng-src="{{ track.artwork_url.replace('large','t500x500') }}" alt="{{ track.title }}"
-            height="360" width="360" class="playing-art mb2" />
-            <h2 class="playing-title truncate">{{track.title}}</h2>
-            <h3 class="playing-artist truncate">{{track.user.username}}</h3>
-            <div class="flex flex-center py2">
-              <div class="flex-grow"></div>
-              <button class="flex-none"
-                title="Play Previous Track"
-                hotkey="{left: previous}"
-                ng-click="previous()">
-                <img class="icon" src="assets/previous.svg">
-              </button>
-              <div class="flex-none radial-progress" ng-value="(currentTime / duration) * 100 | number:0  || 0">
-                <div class="circle">
-                  <div class="mask full">
-                    <div class="fill"></div>
-                  </div>
-                  <div class="mask half">
-                    <div class="fill"></div>
-                    <div class="fill fix"></div>
-                  </div>
-                </div>
-                <div class="inset">
-                  <div class="percentage">
-                    <button class="playing-play"
-                      title="Play/Pause"
-                      ng-click="playPause(index)">
-                      <img ng-if="player.playing !== track.src" class="icon" src="assets/play.svg">
-                      <img ng-if="player.playing === track.src" class="icon" src="assets/pause.svg">
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <button class="flex-none"
-                title="Play Next Track"
-                hotkey="{right: next}"
-                ng-click="next()">
-                <img class="icon" src="assets/next.svg">
-              </button>
-              <div class="flex-grow"></div>
             </div>
-            <aside class="mt4">
-              <a style="color: #DDDDDD;" ng-href="{{track.permalink_url}}">View on SoundCloud</a>
-            </aside>
           </div>
         </div>
-
       </div>
     </div>
     <script>
